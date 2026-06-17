@@ -1,0 +1,8 @@
+res://scenery/door_light.tscn
+res://scenery/house_3.tscn
+res://scenery/garage_door.tscn
+res://scenery/door_white.tscn
+res://scenery/garage_door_script.gd
+res://levels/level.tscn
+res://player/player.tscn
+res://player/fp_cam.gd

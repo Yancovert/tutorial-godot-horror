@@ -5,9 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://cpyyevhxpeplx" path="res://scenery/house.tscn" id="3_cwqvt"]
 [ext_resource type="PackedScene" uid="uid://b8t5hj4bmkvsn" path="res://scenery/house_3.tscn" id="4_5mrsh"]
 
+[sub_resource type="Gradient" id="Gradient_5mrsh"]
+offsets = PackedFloat32Array(0.39518902, 0.63573885, 0.9896907, 0.99656355, 1)
+colors = PackedColorArray(0, 0, 0.011764706, 1, 0.026648788, 0.026664209, 0.03812383, 1, 0.978209, 0.978775, 0.979341, 1, 0.5786589, 0.57899374, 0.5841338, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_safpt"]
+noise_type = 3
+frequency = 0.0297
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gjl0y"]
+noise = SubResource("FastNoiseLite_safpt")
+color_ramp = SubResource("Gradient_5mrsh")
+seamless = true
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hjsbj"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.011230837, 0, 0.13237311, 1)
+sky_horizon_color = Color(6.617978e-07, 0.20740286, 0.287432, 1)
+sky_cover = SubResource("NoiseTexture2D_gjl0y")
+ground_bottom_color = Color(0, 0.20784314, 0.28627452, 1)
+ground_horizon_color = Color(0, 0.20784314, 0.28627452, 1)
 
 [sub_resource type="Sky" id="Sky_cwqvt"]
 sky_material = SubResource("ProceduralSkyMaterial_hjsbj")
@@ -15,8 +31,22 @@ sky_material = SubResource("ProceduralSkyMaterial_hjsbj")
 [sub_resource type="Environment" id="Environment_5mrsh"]
 background_mode = 2
 sky = SubResource("Sky_cwqvt")
-tonemap_mode = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 512
+ssao_enabled = true
+ssao_intensity = 3.0
+ssil_enabled = true
+ssil_radius = 7.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
 glow_enabled = true
+glow_bloom = 1.0
+fog_enabled = true
+fog_light_color = Color(0.31065333, 0.33904132, 0.38320985, 1)
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.50928617, 0.50928617, 0.50928617, 1)
+volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_umreq"]
 size = Vector3(15, 1, 15)
@@ -56,10 +86,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2204447, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=546394297]
 transform = Transform3D(-0.4144287, 0.17311749, -0.8934647, -0.87319416, -0.35231096, 0.33676264, -0.2564779, 0.91973233, 0.29717296, -26.594719, 8.971832, -95.55539)
-light_color = Color(0.96862745, 0.39215687, 0, 1)
-light_energy = 1.283
-light_indirect_energy = 16.0
-light_volumetric_fog_energy = 16.0
+light_energy = 0.085
+light_indirect_energy = 0.793
+light_volumetric_fog_energy = 5.678
 light_specular = 16.0
 shadow_enabled = true
 shadow_bias = 0.0
