@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bu4jn2tqej6q7"]
+
+[ext_resource type="Texture2D" uid="uid://cgpuv2tx6rvhh" path="res://icon.svg" id="1_80vhd"]
+[ext_resource type="PackedScene" uid="uid://btpvguksscp2f" path="res://player/player.tscn" id="2_hjsbj"]
+[ext_resource type="PackedScene" uid="uid://cpyyevhxpeplx" path="res://scenery/house.tscn" id="3_cwqvt"]
+[ext_resource type="PackedScene" uid="uid://b8t5hj4bmkvsn" path="res://scenery/house_3.tscn" id="4_5mrsh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hjsbj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_cwqvt"]
+sky_material = SubResource("ProceduralSkyMaterial_hjsbj")
+
+[sub_resource type="Environment" id="Environment_5mrsh"]
+background_mode = 2
+sky = SubResource("Sky_cwqvt")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umreq"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjsbj"]
+albedo_texture = ExtResource("1_80vhd")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_80vhd"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_safpt"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="level" type="Node3D" unique_id=1269442291]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1471491304]
+environment = SubResource("Environment_5mrsh")
+
+[node name="floor" type="StaticBody3D" parent="." unique_id=1322081129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6059704)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=288479249]
+shape = SubResource("BoxShape3D_umreq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=1370754298]
+transform = Transform3D(15, 0, 0, 0, 0.23390675, 0, 0, 0, 15, 0, 1.2506107, 4.8711305)
+material_override = SubResource("StandardMaterial3D_hjsbj")
+mesh = SubResource("BoxMesh_80vhd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor/MeshInstance3D" unique_id=1780198100]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/MeshInstance3D/StaticBody3D" unique_id=1571965594]
+shape = SubResource("ConcavePolygonShape3D_safpt")
+
+[node name="player" parent="." unique_id=490532119 instance=ExtResource("2_hjsbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2204447, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=546394297]
+transform = Transform3D(-0.4144287, 0.17311749, -0.8934647, -0.87319416, -0.35231096, 0.33676264, -0.2564779, 0.91973233, 0.29717296, -26.594719, 8.971832, -95.55539)
+light_color = Color(0.96862745, 0.39215687, 0, 1)
+light_energy = 1.283
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 16.0
+light_specular = 16.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 10.0
+shadow_reverse_cull_face = true
+shadow_blur = 2.0
+
+[node name="house" parent="." unique_id=2107096712 instance=ExtResource("3_cwqvt")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 2.1087542, 4.178319, 18.900019)
+
+[node name="house_3" parent="." unique_id=444002005 instance=ExtResource("4_5mrsh")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, -4.3541136, -35.90977)
+
+[node name="house2" parent="." unique_id=1914178473 instance=ExtResource("3_cwqvt")]
+transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 44.275654, 4.9712944, -41.517776)

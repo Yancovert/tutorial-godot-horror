@@ -1,0 +1,4 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+glb_models/house_3.glb
